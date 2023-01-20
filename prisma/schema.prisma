@@ -15,12 +15,12 @@ model User {
   name      String 
   username  String  @unique
   password  String  
-  jobs Job[]
+  jobs      Job[]
 }
 
 model Job {
-  id Int @id @default(autoincrement())
-  name String
-  applier User @relation(fields: [applierId], references: [id])
+  id        Int     @id @default(autoincrement())
+  name      String
+  applier   User    @relation(fields: [applierId], references: [id])
   applierId Int
 }
