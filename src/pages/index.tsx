@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { Inter } from '@next/font/google';
 import useUsers from '@/hooks/useUser';
 import Header from '@/components/Header';
 import UserCard from '@/components/UserCard';
@@ -8,8 +7,6 @@ import filterUsersBySearchTerm from '@/helpers/filterUsersBySearchTerm';
 import AddNewUserModal from '@/components/AddNewUserModal';
 import { Plus } from 'lucide-react';
 import Input from '@/components/FormComponents/Input';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   const { users, isLoading, error, revalidate } = useUsers();

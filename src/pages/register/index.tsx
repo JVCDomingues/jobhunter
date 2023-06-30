@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+import Input from '@/components/FormComponents/Input';
 import Snackbar from '@/components/Snackbar';
 import { SnackbarProps } from '@/components/Snackbar/types';
 import Head from 'next/head';
@@ -68,56 +69,62 @@ export default function Login() {
         <title>Login</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="w-screen h-screen bg-gray-300 flex items-center justify-center">
-        <div className="bg-white p-5 rounded-md w-96">
-          <h1 className="text-lg mb-5">Register now</h1>
-          <div className="form-control mb-3">
-            <input
+      <div className="w-screen h-screen bg-zinc-300 flex flex-col gap-5 items-center justify-center">
+        <div className="bg-white rounded-md w-[600px] shadow-md">
+          <div className="border-b border-zinc-300 p-7 bg-zinc-100">
+            <h1 className="text-xl ">Register now</h1>
+          </div>
+          <div className="p-7 flex flex-col bg-white">
+            <Input
               type="text"
               name="name"
               placeholder="Name"
               value={formData.name}
-              className="w-full px-3 py-2 rounded-md border-2 border-gray-500"
+              fullWidth
+              autoFocus
               onChange={event =>
                 handleInputChange(event.target.name, event.target.value)
               }
             />
-          </div>
-          <div className="form-control mb-3">
-            <input
+
+            <Input
               type="text"
               name="username"
               placeholder="Username"
               value={formData.username}
-              className="w-full px-3 py-2 rounded-md border-2 border-gray-500"
+              fullWidth
               onChange={event =>
                 handleInputChange(event.target.name, event.target.value)
               }
             />
-          </div>
-          <div className="form-control mb-5">
-            <input
+            <Input
               type="password"
               placeholder="Password"
               name="password"
               value={formData.password}
-              className="w-full px-3 py-2 rounded-md border-2 border-gray-500"
+              fullWidth
               onChange={event =>
                 handleInputChange(event.target.name, event.target.value)
               }
             />
           </div>
-          <button
-            className="rounded-md bg-slate-900 font-bold text-white px-5 py-3 w-full disabled:bg-gray-400"
-            disabled={!formData.password || formData.password.length < 3}
-            onClick={onSubmit}
-          >
-            Register
-          </button>
 
-          <div className="flex items-center gap-2 mt-5">
+          <div className="p-7 border-t border-t-zinc-300 border-b border-b-zinc-300">
+            <button
+              className="rounded-md bg-blue-800 font-bold text-white px-5 py-4 w-full disabled:bg-gray-400 hover:bg-blue-900 transition-all"
+              disabled={!formData.password || formData.password.length < 3}
+              onClick={onSubmit}
+            >
+              Register
+            </button>
+          </div>
+
+          <div className="flex items-center gap-2 p-7 bg-zinc-100">
             <p>Already have an account?</p>
-            <Link className="underline" href="/login">
+            <Link
+              className="hover:text-blue-900 text-blue-700 font-semibold transition-all"
+              href="/login"
+            >
               Sign in now
             </Link>
           </div>
