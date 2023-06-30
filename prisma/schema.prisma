@@ -19,8 +19,10 @@ model User {
 }
 
 model Job {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   name      String
-  applier   User    @relation(fields: [applierId], references: [id])
+  company   String
+  createdAt DateTime @default(now())
+  applier   User     @relation(fields: [applierId], references: [id])
   applierId Int
 }
