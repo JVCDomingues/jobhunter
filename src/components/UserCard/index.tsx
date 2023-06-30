@@ -1,4 +1,5 @@
 import { User } from '@/hooks/useUser';
+import { Trash2Icon } from 'lucide-react';
 import React from 'react';
 
 interface UserCardProps {
@@ -8,20 +9,23 @@ interface UserCardProps {
 
 export default function UserCard({ user, handleDeleteButton }: UserCardProps) {
   return (
-    <div className="rounded-md shadow-md w-98 cursor-pointer hover:shadow-lg transition-all border-t-8 border-t-lime-600">
+    <div className="rounded-md border shadow border-zinc-200 w-98 cursor-pointer bg-white">
       <div className="p-5">
         <h1 className="text-xl">{user.name}</h1>
-        <span>{user.username}</span>
+        <span className="text-sm text-zinc-500">@{user.username}</span>
       </div>
 
-      <div className="bg-gray-100 border-t border-t-slate-300 px-5 py-3 mt-1 flex justify-between items-center">
-        <span>{user.jobs.length} jobs applied</span>
+      <div className="bg-gray-100 border-t border-t-zinc-300 px-5 py-3 mt-1 flex justify-between items-center">
+        <span className="text-sm text-zinc-500">
+          {user.jobs.length} jobs applied
+        </span>
         <button
-          className="bg-red-500 font-bold px-5 py-3 rounded-md text-white"
+          className="bg-red-500 font-bold px-3 py-2 rounded-md text-white flex items-center gap-3 text-sm hover:bg-red-600 transition-all"
           onClick={handleDeleteButton}
           data-testid="delete-button"
         >
-          Delete user
+          <Trash2Icon size={18} />
+          <span>Delete user</span>
         </button>
       </div>
     </div>

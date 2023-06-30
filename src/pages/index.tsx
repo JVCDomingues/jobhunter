@@ -50,17 +50,16 @@ export default function Home() {
 
       <Header />
 
-      <div className="p-5 bg-zinc-100 h-screen">
+      <div className="p-5 bg-zinc-50 h-screen">
         <div className="ml-5">
           <Input
             placeholder="Search users"
             value={filterInput}
             onChange={event => setFilterInput(event.target.value)}
-            fullWidth
           />
         </div>
 
-        <div className="grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-1 gap-3 p-5 bg-zinc-100">
+        <div className="grid lg:grid-cols-4 sm:grid-cols-1 md:grid-cols-2 gap-3 p-5 bg-zinc-50">
           {filteredUsers.map(user => (
             <UserCard
               key={user.id}
