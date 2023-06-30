@@ -7,6 +7,7 @@ import filterUsersBySearchTerm from '@/helpers/filterUsersBySearchTerm';
 import AddNewUserModal from '@/components/AddNewUserModal';
 import { Plus } from 'lucide-react';
 import Input from '@/components/FormComponents/Input';
+import LoadingScreen from '@/components/LoadingScreen';
 
 export default function Home() {
   const { users, isLoading, error, revalidate } = useUsers();
@@ -25,7 +26,7 @@ export default function Home() {
   };
 
   if (isLoading && !error) {
-    return <h1 className="text-3xl font-bold underline">Loading data...</h1>;
+    return <LoadingScreen />;
   }
 
   if (error) {
