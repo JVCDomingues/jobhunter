@@ -7,6 +7,7 @@ import { useState } from 'react';
 import filterUsersBySearchTerm from '@/helpers/filterUsersBySearchTerm';
 import AddNewUserModal from '@/components/AddNewUserModal';
 import { Plus } from 'lucide-react';
+import Input from '@/components/FormComponents/Input';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -49,40 +50,42 @@ export default function Home() {
 
       <Header />
 
-      <div className="p-5">
-        <input
-          type="text"
-          placeholder="Search users"
-          className="mb-5 px-5 py-3 rounded-md border-slate-900 border-2"
-          value={filterInput}
-          onChange={event => setFilterInput(event.target.value)}
-        />
-      </div>
-      <div className="grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-1 gap-3 p-5">
-        {filteredUsers.map(user => (
-          <UserCard
-            key={user.id}
-            user={user}
-            handleDeleteButton={() => deleteUser(user.id)}
+      <div className="p-5 bg-zinc-100 h-screen">
+        <div className="ml-5">
+          <Input
+            placeholder="Search users"
+            value={filterInput}
+            onChange={event => setFilterInput(event.target.value)}
+            fullWidth
           />
-        ))}
-        {filteredUsers.length === 0 && (
-          <h1 className="text-red-500">
-            No users found! Try looking for a new one
-          </h1>
+        </div>
+
+        <div className="grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-1 gap-3 p-5 bg-zinc-100">
+          {filteredUsers.map(user => (
+            <UserCard
+              key={user.id}
+              user={user}
+              handleDeleteButton={() => deleteUser(user.id)}
+            />
+          ))}
+          {filteredUsers.length === 0 && (
+            <h1 className="text-red-500">
+              No users found! Try looking for a new one
+            </h1>
+          )}
+        </div>
+        <button
+          className="bg-zinc-600 rounded-full p-4 text-white font-bold absolute right-5 bottom-5 hover:bg-zinc-800 transition-all"
+          data-tooltip-target="tooltip-default"
+          onClick={() => setIsModalOpen(true)}
+        >
+          <Plus />
+        </button>
+
+        {isModalOpen && (
+          <AddNewUserModal handleClose={() => setIsModalOpen(false)} />
         )}
       </div>
-      <button
-        className="bg-zinc-600 rounded-full p-4 text-white font-bold absolute right-5 bottom-5 hover:bg-zinc-800 transition-all"
-        data-tooltip-target="tooltip-default"
-        onClick={() => setIsModalOpen(true)}
-      >
-        <Plus />
-      </button>
-
-      {isModalOpen && (
-        <AddNewUserModal handleClose={() => setIsModalOpen(false)} />
-      )}
     </>
   );
 }
