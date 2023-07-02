@@ -28,6 +28,7 @@ export default function UserCard({
           <button
             className="bg-zinc-600 font-bold px-3 py-2 rounded-md text-white flex items-center gap-3 text-sm hover:bg-zinc-800"
             onClick={handleNavigation}
+            data-testid="navigate-button"
           >
             View Details
           </button>

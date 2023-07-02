@@ -20,18 +20,51 @@ const fakeUser: User = {
 describe('UserCard', () => {
   it('should render component correctly', () => {
     const handleClick = jest.fn();
-    render(<UserCard user={fakeUser} handleDeleteButton={handleClick} />);
+    const handleNavigation = jest.fn();
+    render(
+      <UserCard
+        user={fakeUser}
+        handleDeleteButton={handleClick}
+        handleNavigation={handleNavigation}
+      />
+    );
 
-    expect(screen.getByText('jvcdomingues')).toBeInTheDocument();
+    expect(screen.getByText('@jvcdomingues')).toBeInTheDocument();
   });
 
   it('should be able to delete an user correctly', () => {
     const handleClick = jest.fn();
-    render(<UserCard user={fakeUser} handleDeleteButton={handleClick} />);
+    const handleNavigation = jest.fn();
+
+    render(
+      <UserCard
+        user={fakeUser}
+        handleDeleteButton={handleClick}
+        handleNavigation={handleNavigation}
+      />
+    );
 
     const button = screen.getByTestId('delete-button');
     fireEvent.click(button);
 
     expect(handleClick).toHaveBeenCalled();
+  });
+
+  it('should be able to navigate correctly', () => {
+    const handleClick = jest.fn();
+    const handleNavigation = jest.fn();
+
+    render(
+      <UserCard
+        user={fakeUser}
+        handleDeleteButton={handleClick}
+        handleNavigation={handleNavigation}
+      />
+    );
+
+    const button = screen.getByTestId('navigate-button');
+    fireEvent.click(button);
+
+    expect(handleNavigation).toHaveBeenCalled();
   });
 });

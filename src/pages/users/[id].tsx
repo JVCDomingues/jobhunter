@@ -51,7 +51,7 @@ export default function UserPage() {
             <span className="text-sm text-zinc-500">@{user.username}</span>
           </div>
 
-          <h1 className="text-3xl font-bold mb-3">{user?.jobs.length} jobs</h1>
+          <h1 className="text-3xl font-bold mb-3">{user?.jobs?.length} jobs</h1>
 
           <div className="grid lg:grid-cols-4 sm:grid-cols-1 md:grid-cols-2 gap-3">
             {user?.jobs?.length > 0 &&
