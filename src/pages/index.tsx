@@ -1,11 +1,12 @@
+import { useState } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { Plus } from 'lucide-react';
 import useUsers from '@/hooks/useUser';
 import Header from '@/components/Header';
 import UserCard from '@/components/UserCard';
-import { useState } from 'react';
 import filterUsersBySearchTerm from '@/helpers/filterUsersBySearchTerm';
 import AddNewUserModal from '@/components/AddNewUserModal';
-import { Plus } from 'lucide-react';
 import Input from '@/components/FormComponents/Input';
 import LoadingScreen from '@/components/LoadingScreen';
 
@@ -13,6 +14,7 @@ export default function Home() {
   const { users, isLoading, error, revalidate } = useUsers();
   const [filterInput, setFilterInput] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
 
   const filteredUsers = filterUsersBySearchTerm(users, filterInput);
 
@@ -36,6 +38,10 @@ export default function Home() {
       </div>
     );
   }
+
+  const handleNavigation = (userId: number) => {
+    router.push(`/users/${userId}`);
+  };
 
   return (
     <>
@@ -63,6 +69,7 @@ export default function Home() {
               key={user.id}
               user={user}
               handleDeleteButton={() => deleteUser(user.id)}
+              handleNavigation={() => handleNavigation(user.id)}
             />
           ))}
           {filteredUsers.length === 0 && (
