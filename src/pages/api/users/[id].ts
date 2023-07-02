@@ -23,6 +23,9 @@ export default async function handler(
       where: {
         id: Number(req.query.id),
       },
+      include: {
+        jobs: {},
+      },
     });
 
     if (!user?.id) {
