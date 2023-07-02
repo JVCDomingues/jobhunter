@@ -2,6 +2,7 @@
 import Input from '@/components/FormComponents/Input';
 import Snackbar from '@/components/Snackbar';
 import { SnackbarProps } from '@/components/Snackbar/types';
+import Spinner from '@/components/Spinner';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -18,6 +19,7 @@ export default function Login() {
     message: '',
     type: 'error',
   });
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleInputChange = (name: string, value: string) => {
@@ -28,8 +30,7 @@ export default function Login() {
   };
 
   const onSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-
+    setIsLoading(true);
     const response = await fetch('api/users/new', {
       method: 'POST',
       body: JSON.stringify(formData),
@@ -45,6 +46,8 @@ export default function Login() {
       });
       return;
     }
+
+    setIsLoading(false);
 
     handleSuccessRegistration();
   };
@@ -111,11 +114,11 @@ export default function Login() {
 
           <div className="p-7 border-t border-t-zinc-300 border-b border-b-zinc-300">
             <button
-              className="rounded-md bg-blue-800 font-bold text-white px-5 py-4 w-full disabled:bg-gray-400 hover:bg-blue-900 transition-all disabled:cursor-not-allowed"
+              className="flex items-center justify-center rounded-md bg-blue-800 font-bold text-white px-5 py-4 w-full disabled:bg-gray-400 hover:bg-blue-900 transition-all disabled:cursor-not-allowed"
               disabled={!formData.password || formData.password.length < 3}
               onClick={onSubmit}
             >
-              Register
+              {isLoading ? <Spinner /> : 'Register'}
             </button>
           </div>
 
