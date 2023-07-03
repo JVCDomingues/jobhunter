@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { parseISO } from 'date-fns';
 
 import { PrismaClient } from '@prisma/client';
 
@@ -14,21 +15,21 @@ export default async function handler(
   }
 
   if (req.method === 'POST') {
+    const { name, company, createdAt, userId } = req.body;
+
+    if (!name || !company || !createdAt || !userId) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
     const newJob = await prisma.job.create({
       data: {
-        name: 'Software Engineer - FrontEnd',
-        applier: {
-          create: {
-            username: 'jvcdomingues',
-            name: 'João Victor Cardoso Domingues',
-            password: 'admin',
-          },
-        },
-        company: 'Mercado Livre',
-        createdAt: new Date(),
+        name,
+        company,
+        createdAt: parseISO(createdAt),
+        applierId: userId,
       },
     });
 
-    return res.status(201).json(newJob);
+    return res.status(201).json({ newJob });
   }
 }

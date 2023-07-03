@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import Header from '@/components/Header';
 import LoadingScreen from '@/components/LoadingScreen';
-import { User } from '@/hooks/useUser';
-import Head from 'next/head';
 import JobCard from './components/JobCard';
+import { User } from '@/hooks/useUser';
 
 export default function UserPage() {
   const { query } = useRouter();
