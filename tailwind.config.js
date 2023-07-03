@@ -6,6 +6,12 @@ module.exports = {
       fontFamily: {
         sans: ['Roboto', 'sans-serif'],
       },
+      fontWeight: {
+        thin: 200,
+        normal: 400,
+        bold: 700,
+        medium: 600,
+      },
     },
   },
   plugins: [],

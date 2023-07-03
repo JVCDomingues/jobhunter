@@ -10,23 +10,17 @@ import Input from '@/components/FormComponents/Input';
 import LoadingScreen from '@/components/LoadingScreen';
 import Modal from '@/components/Modal';
 import NewUserModal from './components/NewUserForm';
+import DeleteUserDialog from './components/DeleteUserDialog';
 
 export default function Home() {
   const { users, isLoading, error, revalidate } = useUsers();
+  const [currentUserId, setCurrentUserId] = useState(0);
   const [filterInput, setFilterInput] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deleteUserModalOpen, setDeleteUserModalOpen] = useState(false);
   const router = useRouter();
 
   const filteredUsers = filterUsersBySearchTerm(users, filterInput);
-
-  const deleteUser = async (id: number) => {
-    try {
-      const response = await fetch(`api/users/${id}`, {
-        method: 'DELETE',
-      });
-      revalidate();
-    } catch (err) {}
-  };
 
   if (isLoading && !error) {
     return <LoadingScreen />;
@@ -42,6 +36,11 @@ export default function Home() {
 
   const handleNavigation = (userId: number) => {
     router.push(`/users/${userId}`);
+  };
+
+  const handleDeleteButtonClick = (userId: number) => {
+    setDeleteUserModalOpen(true);
+    setCurrentUserId(userId);
   };
 
   return (
@@ -69,7 +68,7 @@ export default function Home() {
             <UserCard
               key={user.id}
               user={user}
-              handleDeleteButton={() => deleteUser(user.id)}
+              handleDeleteButton={() => handleDeleteButtonClick(user.id)}
               handleNavigation={() => handleNavigation(user.id)}
             />
           ))}
@@ -91,6 +90,19 @@ export default function Home() {
             <NewUserModal
               handleModalClose={() => setIsModalOpen(false)}
               revalidate={revalidate}
+            />
+          </div>
+        </Modal>
+
+        <Modal
+          isOpen={deleteUserModalOpen}
+          handleClose={() => setDeleteUserModalOpen(false)}
+        >
+          <div className="w-96">
+            <DeleteUserDialog
+              handleModalClose={() => setDeleteUserModalOpen(false)}
+              revalidate={revalidate}
+              userId={currentUserId}
             />
           </div>
         </Modal>

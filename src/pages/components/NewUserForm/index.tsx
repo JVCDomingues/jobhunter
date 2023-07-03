@@ -69,14 +69,11 @@ export default function NewUserForm({
       </div>
       <div className="flex items-center gap-5 justify-end">
         <button
-          className="p-2 text-md bg-blue-700 text-white rounded-md hover:bg-blue-800 transition-all cursor-pointer mt-3"
+          className="p-3 text-md bg-blue-700 text-white rounded-md hover:bg-blue-800 transition-all cursor-pointer mt-3 w-full"
           onClick={handleSubmit}
           disabled={!formData.username}
         >
           Add user
-        </button>
-        <button className="p-2 text-md text-zinc-700 rounded-md hover:text-zinc-500 transition-all cursor-pointer mt-3">
-          Cancel
         </button>
       </div>
     </>

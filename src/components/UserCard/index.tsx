@@ -4,7 +4,7 @@ import React from 'react';
 
 interface UserCardProps {
   user: User;
-  handleDeleteButton: () => Promise<void>;
+  handleDeleteButton: () => void;
   handleNavigation: () => void;
 }
 
