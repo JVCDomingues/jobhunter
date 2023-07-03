@@ -12,7 +12,6 @@ export default function Login() {
   const [formData, setFormData] = useState({
     name: '',
     username: '',
-    password: '',
   });
   const [snackbarData, setSnackbarData] = useState<SnackbarProps>({
     isOpen: false,
@@ -56,7 +55,6 @@ export default function Login() {
     setFormData({
       name: '',
       username: '',
-      password: '',
     });
     setSnackbarData({
       isOpen: true,
@@ -100,22 +98,12 @@ export default function Login() {
                 handleInputChange(event.target.name, event.target.value)
               }
             />
-            <Input
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={formData.password}
-              fullWidth
-              onChange={event =>
-                handleInputChange(event.target.name, event.target.value)
-              }
-            />
           </div>
 
           <div className="p-7 border-t border-t-zinc-300 border-b border-b-zinc-300">
             <button
               className="flex items-center justify-center rounded-md bg-blue-800 font-bold text-white px-5 py-4 w-full disabled:bg-gray-400 hover:bg-blue-900 transition-all disabled:cursor-not-allowed"
-              disabled={!formData.password || formData.password.length < 3}
+              disabled={!formData.username}
               onClick={onSubmit}
             >
               {isLoading ? <Spinner /> : 'Register'}
