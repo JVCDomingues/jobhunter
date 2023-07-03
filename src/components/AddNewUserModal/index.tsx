@@ -13,7 +13,6 @@ export default function AddNewUserModal({ handleClose }: AddNewUserModalProps) {
     username: '',
     password: '',
   });
-  const { revalidate } = useUsers();
 
   const handleInputChange = (name: string, value: string) => {
     setFormData({

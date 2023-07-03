@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 export interface User {
   id: number;
@@ -36,9 +36,9 @@ const useUsers = () => {
     fetchUsers();
   }, []);
 
-  const revalidate = () => {
-    fetchUsers();
-  };
+  const revalidate = useCallback(async () => {
+    await fetchUsers();
+  }, []);
 
   return { users, error, isLoading, revalidate };
 };

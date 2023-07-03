@@ -6,9 +6,10 @@ import useUsers from '@/hooks/useUser';
 import Header from '@/components/Header';
 import UserCard from '@/components/UserCard';
 import filterUsersBySearchTerm from '@/helpers/filterUsersBySearchTerm';
-import AddNewUserModal from '@/components/AddNewUserModal';
 import Input from '@/components/FormComponents/Input';
 import LoadingScreen from '@/components/LoadingScreen';
+import Modal from '@/components/Modal';
+import NewUserModal from './components/NewUserForm';
 
 export default function Home() {
   const { users, isLoading, error, revalidate } = useUsers();
@@ -80,15 +81,19 @@ export default function Home() {
         </div>
         <button
           className="bg-zinc-600 rounded-full p-4 text-white font-bold absolute right-5 bottom-5 hover:bg-zinc-800 transition-all"
-          data-tooltip-target="tooltip-default"
           onClick={() => setIsModalOpen(true)}
         >
           <Plus />
         </button>
 
-        {isModalOpen && (
-          <AddNewUserModal handleClose={() => setIsModalOpen(false)} />
-        )}
+        <Modal isOpen={isModalOpen} handleClose={() => setIsModalOpen(false)}>
+          <div className="w-96">
+            <NewUserModal
+              handleModalClose={() => setIsModalOpen(false)}
+              revalidate={revalidate}
+            />
+          </div>
+        </Modal>
       </div>
     </>
   );

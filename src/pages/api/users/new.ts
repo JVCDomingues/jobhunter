@@ -1,11 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client';
-const bcrypt = require('bcrypt');
 
 interface RequestBody {
   name: string;
   username: string;
-  password: string;
 }
 
 const prisma = new PrismaClient();
