@@ -15,21 +15,24 @@ export default async function handler(
   }
 
   if (req.method === 'POST') {
-    const { name, company, createdAt, userId } = req.body;
+    const { name, company, createdAt, userId } = JSON.parse(req.body);
 
     if (!name || !company || !createdAt || !userId) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    const newJob = await prisma.job.create({
-      data: {
-        name,
-        company,
-        createdAt: parseISO(createdAt),
-        applierId: userId,
-      },
-    });
-
-    return res.status(201).json({ newJob });
+    try {
+      const newJob = await prisma.job.create({
+        data: {
+          name,
+          company,
+          createdAt: parseISO(createdAt),
+          applierId: userId,
+        },
+      });
+      return res.status(201).json({ newJob });
+    } catch (err) {
+      return res.status(400).json({ message: 'Could not add new job' });
+    }
   }
 }
