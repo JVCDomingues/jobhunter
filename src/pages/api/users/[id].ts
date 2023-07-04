@@ -9,17 +9,20 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'DELETE') {
-    const users = await prisma.user.delete({
-      where: {
-        id: Number(req.query.id),
-      },
-    });
-
-    return res.status(200).json(users);
+    try {
+      const users = await prisma.user.delete({
+        where: {
+          id: Number(req.query.id),
+        },
+      });
+      return res.status(200).json(users);
+    } catch (err) {
+      return res.status(400).json({ error: 'Could not delete user' });
+    }
   }
 
   if (req.method === 'GET') {
-    const user = await prisma.user.findFirst({
+    const user = await prisma.user.findUnique({
       where: {
         id: Number(req.query.id),
       },

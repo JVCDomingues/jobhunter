@@ -1,4 +1,7 @@
 import Input from '@/components/FormComponents/Input';
+import ErrorToast from '@/components/Toast/ErrorToast';
+import SuccessToast from '@/components/Toast/SuccessToast';
+import { useToast } from '@/components/Toast/ToastContext';
 import { useState } from 'react';
 
 interface NewUserFormProps {
@@ -14,6 +17,7 @@ export default function NewUserForm({
     name: '',
     username: '',
   });
+  const { openToast } = useToast();
 
   const handleInputChange = (name: string, value: string) => {
     setFormData({
@@ -27,22 +31,32 @@ export default function NewUserForm({
       method: 'POST',
       body: JSON.stringify(formData),
     });
+    const data = await response.json();
     if (response.status === 201) {
       handleSuccessRegistration();
     }
 
     if (response.status !== 201) {
-      console.error('An error ocurred');
+      triggerErrorToast(data.message);
     }
   };
 
   const handleSuccessRegistration = async () => {
     await revalidate();
     handleModalClose();
+    triggerSuccessToast();
     setFormData({
       name: '',
       username: '',
     });
+  };
+
+  const triggerErrorToast = (message: string) => {
+    openToast(<ErrorToast message={message} />);
+  };
+
+  const triggerSuccessToast = () => {
+    openToast(<SuccessToast message="User added successfully" />);
   };
 
   return (

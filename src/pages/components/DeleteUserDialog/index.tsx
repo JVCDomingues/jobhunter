@@ -1,4 +1,7 @@
-import { AlertTriangle } from 'lucide-react';
+import ErrorToast from '@/components/Toast/ErrorToast';
+import SuccessToast from '@/components/Toast/SuccessToast';
+import { useToast } from '@/components/Toast/ToastContext';
+import { AlertCircleIcon } from 'lucide-react';
 
 interface DeleteUserDialogProps {
   handleModalClose: () => void;
@@ -11,28 +14,37 @@ export default function DeleteUserDialog({
   revalidate,
   userId,
 }: DeleteUserDialogProps) {
+  const { openToast } = useToast();
+
   const deleteUser = async () => {
     const response = await fetch(`api/users/${userId}`, {
       method: 'DELETE',
     });
+    const data = await response.json();
 
     if (response.status === 200) {
       await revalidate();
       handleModalClose();
+      triggerSuccessToast('User deleted successfully');
     }
 
     if (response.status !== 200) {
-      console.error('error');
+      triggerErrorToast(data.error);
     }
+  };
+
+  const triggerErrorToast = (message: string) => {
+    openToast(<ErrorToast message={message} />);
+  };
+
+  const triggerSuccessToast = (message: string) => {
+    openToast(<SuccessToast message={message} />);
   };
 
   return (
     <div>
-      <div className="flex items-center gap-5">
-        <AlertTriangle
-          className="bg-red-100 p-2 rounded-full border border-red-300 text-red-500"
-          size={40}
-        />
+      <div className="flex items-center gap-4">
+        <AlertCircleIcon size={28} className="text-red-600" />
         <span className="font-medium">Delete user</span>
       </div>
       <p className="mt-5 text-zinc-500">
