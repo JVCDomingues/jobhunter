@@ -71,7 +71,7 @@ export default function NewJobForm({
   };
 
   return (
-    <div className="w-[450px]">
+    <div className="w-full sm:w-[450px]">
       <div className="p-6 bg-zinc-50 font-bold border-b border-zinc-200 rounded-t-lg">
         <h1 className="text-md">New application</h1>
       </div>
@@ -106,13 +106,13 @@ export default function NewJobForm({
 
       <div className="p-6 border-t border-zinc-200 bg-zinc-50 flex items-center gap-4 justify-end rounded-b-lg">
         <button
-          className="rounded-md p-2 w-[90px] bg-white border border-zinc-200"
+          className="rounded-md p-2 sm:w-[90px] w-full bg-white border border-zinc-200"
           onClick={handleModalClose}
         >
           Cancel
         </button>
         <button
-          className="bg-blue-600 text-white font-bold p-2 rounded-md w-[90px] hover:bg-blue-800 transition-all"
+          className="bg-blue-600 text-white font-bold p-2 rounded-md sm:w-[90px] w-full hover:bg-blue-800 transition-all"
           onClick={handleSubmit}
           disabled={!formData.company || !formData.name || !formData.createdAt}
         >

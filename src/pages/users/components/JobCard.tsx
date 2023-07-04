@@ -13,7 +13,7 @@ export default function JobCard({ job }: JobCardProps) {
 
   return (
     <div
-      className="bg-white rounded-md shadow-sm w-full p-5 border border-zinc-300"
+      className="bg-white rounded-md shadow-sm p-5 border border-zinc-300"
       key={job.id}
     >
       <div className="flex items-center gap-3">
