@@ -60,9 +60,11 @@ export default function NewUserForm({
   };
 
   return (
-    <>
-      <h1 className="text-xl mb-5 font-semibold">Add new user</h1>
-      <div className="flex flex-col bg-white">
+    <div className="w-[450px]">
+      <div className="p-6 bg-zinc-50 font-bold border-b border-zinc-200 rounded-t-lg">
+        <h1 className="text-md">New user</h1>
+      </div>
+      <div className="flex flex-col bg-white p-6">
         <Input
           placeholder="Name"
           autoFocus
@@ -81,15 +83,21 @@ export default function NewUserForm({
           }
         />
       </div>
-      <div className="flex items-center gap-5 justify-end">
+      <div className="flex items-center gap-4 justify-end p-6 border-t border-zinc-200 bg-zinc-50 rounded-b-lg">
         <button
-          className="p-3 text-md bg-blue-700 text-white rounded-md hover:bg-blue-800 transition-all cursor-pointer mt-3 w-full"
+          className="rounded-md p-2 w-[90px] bg-white border border-zinc-200"
+          onClick={handleModalClose}
+        >
+          Cancel
+        </button>
+        <button
+          className="bg-blue-600 text-white font-bold p-2 rounded-md w-[90px] hover:bg-blue-800 transition-all cursor-pointer"
           onClick={handleSubmit}
           disabled={!formData.username}
         >
-          Add user
+          Submit
         </button>
       </div>
-    </>
+    </div>
   );
 }

@@ -43,14 +43,17 @@ export default function DeleteUserDialog({
 
   return (
     <div>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 p-5">
         <AlertCircleIcon size={28} className="text-red-600" />
         <span className="font-medium">Delete user</span>
       </div>
-      <p className="mt-5 text-zinc-500">
-        Are you sure you want to delete this user? This action cannot be undone.
-      </p>
-      <div className="flex items-center justify-end gap-3 mt-6">
+      <div className="px-6">
+        <p className="text-zinc-500">
+          Are you sure you want to delete this user? This action cannot be
+          undone.
+        </p>
+      </div>
+      <div className="flex items-center justify-end gap-3 mt-2 p-5">
         <button
           className="border w-[80px] border-zinc-200 rounded-md px-3 py-2 text-sm font-bold hover:bg-zinc-100 transition-all"
           onClick={handleModalClose}

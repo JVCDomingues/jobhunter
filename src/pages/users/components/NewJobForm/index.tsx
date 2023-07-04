@@ -88,7 +88,6 @@ export default function NewJobForm({
         />
         <Input
           placeholder="Company"
-          autoFocus
           name="company"
           value={formData.company}
           onChange={event =>
@@ -97,7 +96,6 @@ export default function NewJobForm({
         />
         <Input
           type="date"
-          autoFocus
           name="createdAt"
           value={formData.createdAt}
           onChange={event =>
