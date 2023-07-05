@@ -14,6 +14,7 @@ export default function Modal({ isOpen, handleClose, children }: ModalProps) {
         isOpen ? 'visible bg-black/20' : 'invisible'
       }`}
       onClick={handleClose}
+      data-testid="modal-container"
     >
       <div
         onClick={event => event.stopPropagation()}
