@@ -1,10 +1,8 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { FiLogOut, FiMenu, FiX } from 'react-icons/fi';
+import { FiMenu, FiX } from 'react-icons/fi';
 
 export default function Header() {
-  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -42,6 +40,7 @@ export default function Header() {
         <button
           className="text-gray-600 hover:text-gray-900 focus:outline-none"
           onClick={toggleMenu}
+          data-testid="toggle-menu"
         >
           {isMenuOpen ? (
             <FiX className="h-6 w-6" />

@@ -1,5 +1,5 @@
 import Header from '.';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 jest.mock('next/router', () => ({
@@ -11,5 +11,14 @@ describe('Header component', () => {
     render(<Header />);
 
     expect(screen.getByText('jobHunter')).toBeInTheDocument();
+  });
+
+  it('should be able to open menu when the screen size is small', () => {
+    render(<Header />);
+
+    const button = screen.getByTestId('toggle-menu');
+    fireEvent.click(button);
+
+    expect(screen.getByRole('navigation')).toBeInTheDocument();
   });
 });
