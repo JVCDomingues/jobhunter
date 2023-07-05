@@ -86,12 +86,10 @@ export default function Home() {
         </button>
 
         <Modal isOpen={isModalOpen} handleClose={() => setIsModalOpen(false)}>
-          <div className="w-96">
-            <NewUserModal
-              handleModalClose={() => setIsModalOpen(false)}
-              revalidate={revalidate}
-            />
-          </div>
+          <NewUserModal
+            handleModalClose={() => setIsModalOpen(false)}
+            revalidate={revalidate}
+          />
         </Modal>
 
         <Modal
