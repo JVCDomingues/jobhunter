@@ -1,31 +1,55 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
-import { FiLogOut } from 'react-icons/fi';
+import React, { useState } from 'react';
+import { FiLogOut, FiMenu, FiX } from 'react-icons/fi';
 
 export default function Header() {
   const router = useRouter();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
-    <header className="bg-white border-b border-zinc-300 shadow px-4 md:px-11 py-3 flex flex-wrap justify-between items-center">
+    <header className="bg-white border-b border-zinc-300 shadow md:px-11 p-4 flex flex-wrap justify-between items-center">
       <span className="text-xl">jobHunter</span>
-      <nav className="flex items-center gap-5">
-        <span className="hidden md:inline-block font-normal text-zinc-600 cursor-pointer">
-          Home
-        </span>
-        <span className="hidden md:inline-block font-normal text-zinc-600 cursor-pointer">
-          Jobs
-        </span>
-        <span className="hidden md:inline-block font-normal text-zinc-600 cursor-pointer">
-          Dashboard
-        </span>
-      </nav>
-      <button
-        className="bg-blue-700 text-white font-bold px-3 py-2 rounded-md flex items-center gap-2 md:gap-4 hover:bg-blue-600 transition-all"
-        onClick={() => router.push('/register')}
+      <nav
+        className={`${
+          isMenuOpen ? 'flex' : 'hidden'
+        } md:flex md:items-center md:gap-5`}
       >
-        <FiLogOut />
-        <span className="hidden md:inline-block">Register</span>
-      </button>
+        <Link
+          className="font-normal text-zinc-600 cursor-pointer hover:text-blue-600 transition-all"
+          href="/"
+        >
+          Home
+        </Link>
+        <Link
+          className="font-normal text-zinc-600 cursor-pointer hover:text-blue-600 transition-all"
+          href="/jobs"
+        >
+          Jobs
+        </Link>
+        <Link
+          className="font-normal text-zinc-600 cursor-pointer hover:text-blue-600 transition-all"
+          href="/dashboard"
+        >
+          Dashboard
+        </Link>
+      </nav>
+      <div className="md:hidden">
+        <button
+          className="text-gray-600 hover:text-gray-900 focus:outline-none"
+          onClick={toggleMenu}
+        >
+          {isMenuOpen ? (
+            <FiX className="h-6 w-6" />
+          ) : (
+            <FiMenu className="h-6 w-6" />
+          )}
+        </button>
+      </div>
     </header>
   );
 }

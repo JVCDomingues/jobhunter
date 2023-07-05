@@ -1,5 +1,5 @@
 import { User } from '@/hooks/useUser';
-import { Trash2Icon } from 'lucide-react';
+import { Trash2Icon, GanttChartIcon } from 'lucide-react';
 import React from 'react';
 
 interface UserCardProps {
@@ -30,6 +30,7 @@ export default function UserCard({
             onClick={handleNavigation}
             data-testid="navigate-button"
           >
+            <GanttChartIcon size={20} />
             View Details
           </button>
           <button
