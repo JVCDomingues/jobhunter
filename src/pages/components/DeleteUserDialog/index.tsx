@@ -57,12 +57,14 @@ export default function DeleteUserDialog({
         <button
           className="border w-[80px] border-zinc-200 rounded-md px-3 py-2 text-sm font-bold hover:bg-zinc-100 transition-all"
           onClick={handleModalClose}
+          data-testid="cancel-button"
         >
           Cancel
         </button>
         <button
           className="w-[80px] bg-red-500 font-bold px-3 py-2 rounded-md text-white text-sm hover:bg-red-700 transition-all"
           onClick={deleteUser}
+          data-testid="delete-button"
         >
           Delete
         </button>

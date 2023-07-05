@@ -1,3 +1,4 @@
+import { Goal } from 'lucide-react';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
@@ -10,8 +11,13 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white border-b border-zinc-300 shadow md:px-11 p-4 flex flex-wrap justify-between items-center">
-      <span className="text-xl">jobHunter</span>
+    <header className="bg-white border-b border-slate-300 shadow md:px-11 p-4 flex flex-wrap justify-between items-center">
+      <div className="flex items-center gap-5">
+        <Goal size={32} className="text-blue-600" />
+        <span className="font-bold text-transparent text-2xl bg-clip-text bg-gradient-to-r from-slate-600 to-slate-800">
+          JobHunter
+        </span>
+      </div>
       <nav
         className={`${
           isMenuOpen ? 'flex' : 'hidden'
