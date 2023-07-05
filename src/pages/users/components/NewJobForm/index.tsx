@@ -77,51 +77,57 @@ export default function NewJobForm({
       </div>
 
       <div className="bg-white p-6 flex flex-col">
-        <label
-          htmlFor="jobName"
-          className="font-normal mb-2 text-sm text-zinc-900"
-        >
-          Job name
-        </label>
-        <Input
-          autoFocus
-          name="name"
-          id="jobName"
-          value={formData.name}
-          onChange={event =>
-            handleInputChange(event.target.name, event.target.value)
-          }
-        />
-        <label
-          htmlFor="jobName"
-          className="font-normal mb-2 text-sm text-zinc-900"
-        >
-          Company
-        </label>
-        <Input
-          name="company"
-          value={formData.company}
-          onChange={event =>
-            handleInputChange(event.target.name, event.target.value)
-          }
-        />
-        <label
-          htmlFor="jobName"
-          className="font-normal mb-2 text-sm text-zinc-900"
-        >
-          Application date
-        </label>
-        <Input
-          type="date"
-          name="createdAt"
-          value={formData.createdAt}
-          onChange={event =>
-            handleInputChange(event.target.name, event.target.value)
-          }
-        />
+        <div className="mb-5 flex flex-col">
+          <label
+            htmlFor="jobName"
+            className="font-normal mb-2 text-sm text-zinc-900"
+          >
+            Job name
+          </label>
+          <Input
+            autoFocus
+            name="name"
+            id="jobName"
+            value={formData.name}
+            onChange={event =>
+              handleInputChange(event.target.name, event.target.value)
+            }
+          />
+        </div>
+        <div className="mb-5 flex flex-col">
+          <label
+            htmlFor="jobName"
+            className="font-normal mb-2 text-sm text-zinc-900"
+          >
+            Company
+          </label>
+          <Input
+            name="company"
+            value={formData.company}
+            onChange={event =>
+              handleInputChange(event.target.name, event.target.value)
+            }
+          />
+        </div>
+        <div className="mb-5 flex flex-col">
+          <label
+            htmlFor="jobName"
+            className="font-normal mb-2 text-sm text-zinc-900"
+          >
+            Application date
+          </label>
+          <Input
+            type="date"
+            name="createdAt"
+            value={formData.createdAt}
+            onChange={event =>
+              handleInputChange(event.target.name, event.target.value)
+            }
+          />
+        </div>
       </div>
 
-      <div className="p-6 border-t border-zinc-200 bg-zinc-50 flex items-center gap-4 justify-end rounded-b-lg">
+      <div className="py-4 px-6 border-t border-zinc-200 bg-zinc-50 flex items-center gap-4 justify-end rounded-b-lg">
         <button
           className="rounded-md p-2 sm:w-[90px] w-full bg-white border border-zinc-200"
           onClick={handleModalClose}
