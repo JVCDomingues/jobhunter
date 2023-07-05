@@ -71,29 +71,46 @@ export default function NewJobForm({
   };
 
   return (
-    <div className="w-full sm:w-[450px]">
-      <div className="p-6 bg-zinc-50 font-bold border-b border-zinc-200 rounded-t-lg">
-        <h1 className="text-md">New application</h1>
+    <div className="w-full sm:w-[500px]">
+      <div className="p-6 bg-zinc-50 font-normal border-b border-zinc-200 rounded-t-lg">
+        <h1 className="text-xl">New application</h1>
       </div>
 
       <div className="bg-white p-6 flex flex-col">
+        <label
+          htmlFor="jobName"
+          className="font-normal mb-2 text-sm text-zinc-900"
+        >
+          Job name
+        </label>
         <Input
-          placeholder="Job name"
           autoFocus
           name="name"
+          id="jobName"
           value={formData.name}
           onChange={event =>
             handleInputChange(event.target.name, event.target.value)
           }
         />
+        <label
+          htmlFor="jobName"
+          className="font-normal mb-2 text-sm text-zinc-900"
+        >
+          Company
+        </label>
         <Input
-          placeholder="Company"
           name="company"
           value={formData.company}
           onChange={event =>
             handleInputChange(event.target.name, event.target.value)
           }
         />
+        <label
+          htmlFor="jobName"
+          className="font-normal mb-2 text-sm text-zinc-900"
+        >
+          Application date
+        </label>
         <Input
           type="date"
           name="createdAt"

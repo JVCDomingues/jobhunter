@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Header from '@/components/Header';
 import LoadingScreen from '@/components/LoadingScreen';
-import JobCard from './components/JobCard';
+import JobCard from './components/JobCard/JobCard';
 import { User } from '@/hooks/useUser';
 import { Plus } from 'lucide-react';
 import Modal from '@/components/Modal';
@@ -57,11 +57,11 @@ export default function UserPage() {
             <span className="text-sm text-zinc-500">@{user.username}</span>
           </div>
 
-          <div className="flex items-center gap-5 mb-3">
+          <div className="flex items-center gap-5 mb-3 mt-10">
             <h1 className="text-3xl font-bold">{user?.jobs?.length} jobs</h1>
             <button
               onClick={() => setIsModalOpen(true)}
-              className="rounded-md bg-blue-700 text-white p-2 text-sm font-bold flex items-center gap-2 transition-all hover:bg-blue-800"
+              className="rounded-md bg-blue-700 text-white p-2 text-sm font-medium flex items-center gap-2 transition-all hover:bg-blue-800"
             >
               <Plus size={18} />
               New application
