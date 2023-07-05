@@ -14,7 +14,7 @@ export default function UserCard({
   handleNavigation,
 }: UserCardProps) {
   return (
-    <div className="rounded-md border shadow border-zinc-200 w-98 cursor-pointer bg-white">
+    <div className="rounded-md border shadow border-zinc-200 w-98   bg-white">
       <div className="p-5">
         <h1 className="text-xl">{user.name}</h1>
         <span className="text-sm text-zinc-500">@{user.username}</span>
@@ -26,20 +26,18 @@ export default function UserCard({
         </span>
         <div className="flex items-center gap-2">
           <button
-            className="bg-zinc-600 font-bold px-3 py-2 rounded-md text-white flex items-center gap-3 text-sm hover:bg-zinc-800 transition-all"
+            className="bg-zinc-600 p-3 rounded-full text-white  hover:bg-zinc-800 transition-all"
             onClick={handleNavigation}
             data-testid="navigate-button"
           >
             <GanttChartIcon size={20} />
-            View Details
           </button>
           <button
-            className="bg-red-500 font-bold px-3 py-2 rounded-md text-white flex items-center gap-3 text-sm hover:bg-red-700 transition-all"
+            className="bg-red-500 p-3 rounded-full text-white hover:bg-red-700 transition-all"
             onClick={handleDeleteButton}
             data-testid="delete-button"
           >
             <Trash2Icon size={18} />
-            <span>Delete user</span>
           </button>
         </div>
       </div>
