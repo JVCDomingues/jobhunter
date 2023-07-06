@@ -22,7 +22,7 @@ model Job {
   name      String
   company   String
   status    String   @default("Pending")
-  modality  String
+  modality  String   @default("Remote")
   createdAt DateTime @default(now())
   applier   User     @relation(fields: [applierId], references: [id])
   applierId Int      

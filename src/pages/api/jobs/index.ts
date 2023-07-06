@@ -19,9 +19,11 @@ export default async function handler(
   }
 
   if (req.method === 'POST') {
-    const { name, company, createdAt, userId } = JSON.parse(req.body);
+    const { name, company, createdAt, userId, modality, status } = JSON.parse(
+      req.body
+    );
 
-    if (!name || !company || !createdAt || !userId) {
+    if (!name || !company || !createdAt || !userId || !modality || !status) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
@@ -32,6 +34,7 @@ export default async function handler(
           company,
           createdAt: parseISO(createdAt),
           applierId: userId,
+          modality,
         },
       });
       return res.status(201).json({ newJob });

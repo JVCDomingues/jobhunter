@@ -12,6 +12,8 @@ export interface Job {
   name: string;
   company: string;
   createdAt: string;
+  modality: string;
+  status: string;
 }
 
 const useUsers = () => {
