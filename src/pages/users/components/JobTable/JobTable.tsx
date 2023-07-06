@@ -8,6 +8,7 @@ import {
   FolderEdit,
   MapPin,
 } from 'lucide-react';
+import { jobStatusDictionary } from '../../helpers/jobStatusIcon';
 
 interface JobTableProps {
   jobs: Job[];
@@ -92,7 +93,7 @@ export default function JobTable({ jobs }: JobTableProps) {
               <td className="px-6 py-4">{job.company}</td>
               <td className="px-6 py-4">{job.modality}</td>
               <td className="px-6 py-4 flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                {jobStatusDictionary[job.status]}
                 {job.status}
               </td>
               <td className="px-6 py-4">

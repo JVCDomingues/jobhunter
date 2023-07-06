@@ -20,4 +20,21 @@ export default async function handler(
       return res.status(400).json({ message: err });
     }
   }
+
+  if (req.method === 'PUT') {
+    try {
+      const data = await prisma.job.update({
+        where: {
+          id: Number(req.query.id),
+        },
+        data: {
+          status: req.body.status,
+        },
+      });
+
+      return res.status(200).json(data);
+    } catch (err) {
+      return res.status(400).json({ message: err });
+    }
+  }
 }
