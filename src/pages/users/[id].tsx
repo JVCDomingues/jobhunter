@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Header from '@/components/Header';
 import LoadingScreen from '@/components/LoadingScreen';
-import JobCard from './components/JobCard/JobCard';
+import JobTable from './components/JobTable/JobTable';
 import { User } from '@/hooks/useUser';
 import { Plus } from 'lucide-react';
 import Modal from '@/components/Modal';
@@ -51,14 +51,18 @@ export default function UserPage() {
         <Header />
         {/* Main div */}
         <div className="p-7">
-          <h1 className="mb-5 text-3xl font-bold">User</h1>
+          <h1 className="mb-5 text-3xl font-medium text-zinc-700">User</h1>
           <div className="bg-white rounded-md shadow-sm w-full p-5 border border-zinc-300 mb-5">
             <h1 className="text-xl">{user.name}</h1>
-            <span className="text-sm text-zinc-500">@{user.username}</span>
+            <span className="text-sm text-zinc-500 font-normal">
+              @{user.username}
+            </span>
           </div>
 
-          <div className="flex items-center gap-5 mb-3 mt-10">
-            <h1 className="text-3xl font-bold">{user?.jobs?.length} jobs</h1>
+          <div className="flex items-center justify-between gap-5 mb-3 mt-10">
+            <h1 className="text-3xl font-medium text-zinc-700">
+              {user?.jobs?.length} jobs
+            </h1>
             <button
               onClick={() => setIsModalOpen(true)}
               className="rounded-md bg-blue-700 text-white p-2 text-sm font-medium flex items-center gap-2 transition-all hover:bg-blue-800"
@@ -68,10 +72,7 @@ export default function UserPage() {
             </button>
           </div>
 
-          <div className="grid lg:grid-cols-4 sm:grid-cols-1 md:grid-cols-2 gap-3">
-            {user?.jobs?.length > 0 &&
-              user.jobs.map(job => <JobCard job={job} key={job.id} />)}
-          </div>
+          <JobTable jobs={user.jobs} />
         </div>
         {/* Main div */}
 

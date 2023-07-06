@@ -21,6 +21,8 @@ model Job {
   id        Int      @id @default(autoincrement())
   name      String
   company   String
+  status    String   @default("Pending")
+  modality  String
   createdAt DateTime @default(now())
   applier   User     @relation(fields: [applierId], references: [id])
   applierId Int      

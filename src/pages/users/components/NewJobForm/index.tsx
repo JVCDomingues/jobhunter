@@ -111,6 +111,22 @@ export default function NewJobForm({
         </div>
         <div className="mb-5 flex flex-col">
           <label
+            htmlFor="modality"
+            className="font-normal mb-2 text-sm text-zinc-900"
+          >
+            Modality
+          </label>
+          <select
+            id="modality"
+            name="modality"
+            value={formData.company}
+            onChange={event =>
+              handleInputChange(event.target.name, event.target.value)
+            }
+          />
+        </div>
+        <div className="mb-5 flex flex-col">
+          <label
             htmlFor="jobName"
             className="font-normal mb-2 text-sm text-zinc-900"
           >

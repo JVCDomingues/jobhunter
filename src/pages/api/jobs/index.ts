@@ -10,8 +10,12 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'GET') {
-    const jobs = await prisma.job.findMany();
-    return res.status(200).json(jobs);
+    try {
+      const jobs = await prisma.job.findMany();
+      return res.status(200).json(jobs);
+    } catch (err) {
+      return res.status(404).json({ message: 'Jobs not found' });
+    }
   }
 
   if (req.method === 'POST') {
