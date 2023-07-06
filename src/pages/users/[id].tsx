@@ -65,7 +65,7 @@ export default function UserPage() {
             </button>
           </div>
 
-          <JobTable jobs={user.jobs} />
+          <JobTable jobs={user.jobs} revalidate={revalidate} />
         </div>
         {/* Main div */}
 

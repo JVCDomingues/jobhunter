@@ -11,14 +11,23 @@ import {
 } from 'lucide-react';
 import { jobStatusDictionary } from '../../helpers/jobStatusIcon';
 import { filterJobBySearchTerm } from '../../helpers/filterJobBySearchTerm';
+import Modal from '@/components/Modal';
+import EditJob from '../EditJob';
 
 interface JobTableProps {
   jobs: Job[];
+  revalidate: () => Promise<void>;
 }
 
-export default function JobTable({ jobs }: JobTableProps) {
+export default function JobTable({ jobs, revalidate }: JobTableProps) {
   const [searchTerm, setSearchTerm] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedJob, setSelectedJob] = useState({} as Job);
   const jobsToShow = filterJobBySearchTerm(jobs, searchTerm);
+
+  const handleEditButtonClick = (job: Job) => {
+    setSelectedJob(job);
+  };
 
   return (
     <div className="relative overflow-x-auto shadow-sm sm:rounded-lg border border-slate-200 mt-5">
@@ -113,7 +122,10 @@ export default function JobTable({ jobs }: JobTableProps) {
                   )}
                 </td>
                 <td>
-                  <button className="text-blue-600 font-normal hover:text-blue-500 transition-all ml-6">
+                  <button
+                    className="text-blue-600 font-normal hover:text-blue-500 transition-all ml-6"
+                    onClick={() => handleEditButtonClick(job)}
+                  >
                     Edit
                   </button>
                   <button className="text-red-600 font-normal hover:text-red-500 transition-all ml-6">
@@ -125,6 +137,17 @@ export default function JobTable({ jobs }: JobTableProps) {
           </tbody>
         </table>
       )}
+
+      <Modal
+        isOpen={Boolean(selectedJob.id)}
+        handleClose={() => setSelectedJob({} as Job)}
+      >
+        <EditJob
+          job={selectedJob}
+          handleModalClose={() => setSelectedJob({} as Job)}
+          revalidate={revalidate}
+        />
+      </Modal>
     </div>
   );
 }
