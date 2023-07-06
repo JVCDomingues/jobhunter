@@ -3,6 +3,7 @@ import ErrorToast from '@/components/Toast/ErrorToast';
 import SuccessToast from '@/components/Toast/SuccessToast';
 import { useToast } from '@/components/Toast/ToastContext';
 import { useState } from 'react';
+import { modalities } from './constants';
 
 interface NewJobFormProps {
   userId: number;
@@ -19,6 +20,7 @@ export default function NewJobForm({
     name: '',
     company: '',
     createdAt: '',
+    modality: '',
   });
 
   const { openToast } = useToast();
@@ -67,6 +69,7 @@ export default function NewJobForm({
       name: '',
       company: '',
       createdAt: '',
+      modality: '',
     });
   };
 
@@ -119,11 +122,19 @@ export default function NewJobForm({
           <select
             id="modality"
             name="modality"
-            value={formData.company}
+            value={formData.modality}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 font-normal"
             onChange={event =>
               handleInputChange(event.target.name, event.target.value)
             }
-          />
+          >
+            <option selected>Choose a modality</option>
+            {modalities.map((modality, index) => (
+              <option value={modality} key={index}>
+                {modality}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="mb-5 flex flex-col">
           <label
