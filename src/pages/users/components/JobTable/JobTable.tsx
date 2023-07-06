@@ -13,6 +13,7 @@ import { jobStatusDictionary } from '../../helpers/jobStatusIcon';
 import { filterJobBySearchTerm } from '../../helpers/filterJobBySearchTerm';
 import Modal from '@/components/Modal';
 import EditJob from '../EditJob';
+import DeleteJob from '../DeleteJob';
 
 interface JobTableProps {
   jobs: Job[];
@@ -21,12 +22,19 @@ interface JobTableProps {
 
 export default function JobTable({ jobs, revalidate }: JobTableProps) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState({} as Job);
   const jobsToShow = filterJobBySearchTerm(jobs, searchTerm);
 
   const handleEditButtonClick = (job: Job) => {
+    setEditModalOpen(true);
     setSelectedJob(job);
+  };
+
+  const handleDeleteButtonClick = (job: Job) => {
+    setSelectedJob(job);
+    setDeleteModalOpen(true);
   };
 
   return (
@@ -128,7 +136,10 @@ export default function JobTable({ jobs, revalidate }: JobTableProps) {
                   >
                     Edit
                   </button>
-                  <button className="text-red-600 font-normal hover:text-red-500 transition-all ml-6">
+                  <button
+                    className="text-red-600 font-normal hover:text-red-500 transition-all ml-6"
+                    onClick={() => handleDeleteButtonClick(job)}
+                  >
                     Delete
                   </button>
                 </td>
@@ -138,13 +149,21 @@ export default function JobTable({ jobs, revalidate }: JobTableProps) {
         </table>
       )}
 
-      <Modal
-        isOpen={Boolean(selectedJob.id)}
-        handleClose={() => setSelectedJob({} as Job)}
-      >
+      <Modal isOpen={editModalOpen} handleClose={() => setEditModalOpen(false)}>
         <EditJob
           job={selectedJob}
-          handleModalClose={() => setSelectedJob({} as Job)}
+          handleModalClose={() => setEditModalOpen(false)}
+          revalidate={revalidate}
+        />
+      </Modal>
+
+      <Modal
+        isOpen={deleteModalOpen}
+        handleClose={() => setDeleteModalOpen(false)}
+      >
+        <DeleteJob
+          jobId={selectedJob.id}
+          handleModalClose={() => setDeleteModalOpen(false)}
           revalidate={revalidate}
         />
       </Modal>
