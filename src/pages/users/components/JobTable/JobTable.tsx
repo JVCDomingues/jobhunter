@@ -161,11 +161,13 @@ export default function JobTable({ jobs, revalidate }: JobTableProps) {
         isOpen={deleteModalOpen}
         handleClose={() => setDeleteModalOpen(false)}
       >
-        <DeleteJob
-          jobId={selectedJob.id}
-          handleModalClose={() => setDeleteModalOpen(false)}
-          revalidate={revalidate}
-        />
+        <div className="w-96">
+          <DeleteJob
+            jobId={selectedJob.id}
+            handleModalClose={() => setDeleteModalOpen(false)}
+            revalidate={revalidate}
+          />
+        </div>
       </Modal>
     </div>
   );

@@ -14,7 +14,7 @@ model User {
   id        Int     @id   @default(autoincrement())
   name      String 
   username  String  @unique
-  jobs      Job[]
+  jobs      Job[]   
 }
 
 model Job {
@@ -24,6 +24,6 @@ model Job {
   status    String   @default("Pending")
   modality  String   @default("Remote")
   createdAt DateTime @default(now())
-  applier   User     @relation(fields: [applierId], references: [id])
+  applier   User     @relation(fields: [applierId], references: [id], onDelete: Cascade)
   applierId Int      
 }
