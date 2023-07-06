@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Job } from '@/hooks/useUser';
 import { getDateDifference } from '../../helpers/getDateDifference';
 import { getDateIntervalMessage } from '../../helpers/getIntervalMessage';
@@ -9,12 +10,16 @@ import {
   MapPin,
 } from 'lucide-react';
 import { jobStatusDictionary } from '../../helpers/jobStatusIcon';
+import { filterJobBySearchTerm } from '../../helpers/filterJobBySearchTerm';
 
 interface JobTableProps {
   jobs: Job[];
 }
 
 export default function JobTable({ jobs }: JobTableProps) {
+  const [searchTerm, setSearchTerm] = useState('');
+  const jobsToShow = filterJobBySearchTerm(jobs, searchTerm);
+
   return (
     <div className="relative overflow-x-auto shadow-sm sm:rounded-lg border border-slate-200 mt-5">
       <div className="p-4 bg-white">
@@ -44,6 +49,7 @@ export default function JobTable({ jobs }: JobTableProps) {
             id="table-search"
             className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Search for jobs"
+            onChange={event => setSearchTerm(event.target.value)}
           />
         </div>
       </div>
@@ -84,7 +90,7 @@ export default function JobTable({ jobs }: JobTableProps) {
         </thead>
 
         <tbody>
-          {jobs?.map(job => (
+          {jobsToShow?.map(job => (
             <tr
               className="bg-white border-b dark:bg-gray-800 hover:bg-gray-50"
               key={job.id}
