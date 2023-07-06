@@ -8,6 +8,7 @@ import { User } from '@/hooks/useUser';
 import { Plus } from 'lucide-react';
 import Modal from '@/components/Modal';
 import NewJobForm from './components/NewJobForm';
+import Summary from './components/Summary';
 
 export default function UserPage() {
   const { query } = useRouter();
@@ -51,18 +52,10 @@ export default function UserPage() {
         <Header />
         {/* Main div */}
         <div className="p-7">
-          <h1 className="mb-5 text-3xl font-medium text-zinc-700">User</h1>
-          <div className="bg-white rounded-md shadow-sm w-full p-5 border border-zinc-300 mb-5">
-            <h1 className="text-xl">{user.name}</h1>
-            <span className="text-sm text-zinc-500 font-normal">
-              @{user.username}
-            </span>
-          </div>
+          <h1 className="mb-5 text-3xl font-medium text-zinc-700">Summary</h1>
+          <Summary jobs={user.jobs} />
 
           <div className="flex items-center justify-between gap-5 mb-3 mt-10">
-            <h1 className="text-3xl font-medium text-zinc-700">
-              {user?.jobs?.length} jobs
-            </h1>
             <button
               onClick={() => setIsModalOpen(true)}
               className="rounded-md bg-blue-700 text-white p-2 text-sm font-medium flex items-center gap-2 transition-all hover:bg-blue-800"

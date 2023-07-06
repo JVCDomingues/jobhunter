@@ -162,7 +162,7 @@ export default function NewJobForm({
           Cancel
         </button>
         <button
-          className="bg-blue-600 text-white font-bold p-2 rounded-md sm:w-[90px] w-full hover:bg-blue-800 transition-all"
+          className="bg-blue-600 text-white font-bold p-2 rounded-md sm:w-[90px] w-full hover:bg-blue-800 transition-all disabled:bg-zinc-500 disabled:cursor-not-allowed"
           onClick={handleSubmit}
           disabled={!formData.company || !formData.name || !formData.createdAt}
         >

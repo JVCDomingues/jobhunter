@@ -53,72 +53,78 @@ export default function JobTable({ jobs }: JobTableProps) {
           />
         </div>
       </div>
-      <table className="w-full text-sm text-left text-gray-500">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 border-b border-zinc-200 border-t">
-          <tr>
-            <th scope="col" className="px-6 py-4">
-              <div className="flex items-center gap-2">
-                <FolderEdit size={16} />
-                Job title
-              </div>
-            </th>
-            <th scope="col" className="px-6 py-3">
-              <div className="flex items-center gap-2">
-                <Building2 size={16} />
-                Company
-              </div>
-            </th>
-            <th scope="col" className="px-6 py-3">
-              <div className="flex items-center gap-2">
-                <MapPin size={16} />
-                Modality
-              </div>
-            </th>
-            <th scope="col" className="px-6 py-3">
-              <div className="flex items-center gap-2">
-                <Flag size={16} />
-                Status
-              </div>
-            </th>
-            <th scope="col" className="px-6 py-3">
-              <div className="flex items-center gap-2">
-                <CalendarDays size={16} />
-                Applied in
-              </div>
-            </th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {jobsToShow?.map(job => (
-            <tr
-              className="bg-white border-b dark:bg-gray-800 hover:bg-gray-50"
-              key={job.id}
-            >
-              <td className="px-6 py-4">{job.name}</td>
-              <td className="px-6 py-4">{job.company}</td>
-              <td className="px-6 py-4">{job.modality}</td>
-              <td className="px-6 py-4 flex items-center gap-3">
-                {jobStatusDictionary[job.status]}
-                {job.status}
-              </td>
-              <td className="px-6 py-4">
-                {getDateIntervalMessage(
-                  getDateDifference(job.createdAt, new Date())
-                )}
-              </td>
-              <td>
-                <button className="text-blue-600 font-normal hover:text-blue-500 transition-all ml-6">
-                  Edit
-                </button>
-                <button className="text-red-600 font-normal hover:text-red-500 transition-all ml-6">
-                  Delete
-                </button>
-              </td>
+      {jobs?.length === 0 ? (
+        <div className="flex items-center p-5 justify-center">
+          <strong className="text-xl font-medium">No jobs applied!</strong>
+        </div>
+      ) : (
+        <table className="w-full text-sm text-left text-gray-500">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 border-b border-zinc-200 border-t">
+            <tr>
+              <th scope="col" className="px-6 py-4">
+                <div className="flex items-center gap-2">
+                  <FolderEdit size={16} />
+                  Job title
+                </div>
+              </th>
+              <th scope="col" className="px-6 py-3">
+                <div className="flex items-center gap-2">
+                  <Building2 size={16} />
+                  Company
+                </div>
+              </th>
+              <th scope="col" className="px-6 py-3">
+                <div className="flex items-center gap-2">
+                  <MapPin size={16} />
+                  Modality
+                </div>
+              </th>
+              <th scope="col" className="px-6 py-3">
+                <div className="flex items-center gap-2">
+                  <Flag size={16} />
+                  Status
+                </div>
+              </th>
+              <th scope="col" className="px-6 py-3">
+                <div className="flex items-center gap-2">
+                  <CalendarDays size={16} />
+                  Applied in
+                </div>
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {jobsToShow?.map(job => (
+              <tr
+                className="bg-white border-b dark:bg-gray-800 hover:bg-gray-50"
+                key={job.id}
+              >
+                <td className="px-6 py-4">{job.name}</td>
+                <td className="px-6 py-4">{job.company}</td>
+                <td className="px-6 py-4">{job.modality}</td>
+                <td className="px-6 py-4 flex items-center gap-3">
+                  {jobStatusDictionary[job.status]}
+                  {job.status}
+                </td>
+                <td className="px-6 py-4">
+                  {getDateIntervalMessage(
+                    getDateDifference(job.createdAt, new Date())
+                  )}
+                </td>
+                <td>
+                  <button className="text-blue-600 font-normal hover:text-blue-500 transition-all ml-6">
+                    Edit
+                  </button>
+                  <button className="text-red-600 font-normal hover:text-red-500 transition-all ml-6">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }
