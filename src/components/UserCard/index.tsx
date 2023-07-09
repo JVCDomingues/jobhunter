@@ -22,7 +22,7 @@ export default function UserCard({
 
       <div className="bg-gray-100 border-t border-t-zinc-300 px-5 py-3 mt-1 flex justify-between items-center">
         <span className="text-sm text-zinc-500">
-          {user.jobs.length} jobs applied
+          {user.jobs.length} applications
         </span>
         <div className="flex items-center gap-2">
           <button

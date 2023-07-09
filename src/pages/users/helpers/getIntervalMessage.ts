@@ -11,6 +11,6 @@ export const getDateIntervalMessage = (intervalInDays: number): string => {
   } else if (intervalInDays >= 1) {
     return intervalInDays === 1 ? 'a day ago' : `${intervalInDays} days ago`;
   } else {
-    return 'today';
+    return 'Today';
   }
 };
