@@ -95,4 +95,9 @@ describe('FilterJobBySearchTerm', () => {
 
     expect(filteredJobs).toEqual(expectedResult);
   });
+
+  it('should return the full list of jobs if search term is not provided', () => {
+    const filteredJobs = filterJobBySearchTerm(fakeJobs, '');
+    expect(filteredJobs).toEqual(fakeJobs);
+  });
 });
