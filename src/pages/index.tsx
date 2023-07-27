@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Plus } from 'lucide-react';
-import useUsers from '@/hooks/useUser';
 import Header from '@/components/Header';
 import UserCard from '@/components/UserCard';
 import filterUsersBySearchTerm from '@/helpers/filterUsersBySearchTerm';
@@ -11,16 +10,18 @@ import LoadingScreen from '@/components/LoadingScreen';
 import Modal from '@/components/Modal';
 import NewUserModal from './components/NewUserForm';
 import DeleteUserDialog from './components/DeleteUserDialog';
+import { useFetch } from '@/hooks/useFetch';
+import { User } from '@/types/types';
 
 export default function Home() {
-  const { users, isLoading, error, revalidate } = useUsers();
+  const { data, error, isLoading, mutate } = useFetch<User[]>('/api/users');
   const [currentUserId, setCurrentUserId] = useState(0);
   const [filterInput, setFilterInput] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteUserModalOpen, setDeleteUserModalOpen] = useState(false);
   const router = useRouter();
 
-  const filteredUsers = filterUsersBySearchTerm(users, filterInput);
+  const filteredUsers = data && filterUsersBySearchTerm(data, filterInput);
 
   if (isLoading && !error) {
     return <LoadingScreen />;
@@ -64,7 +65,7 @@ export default function Home() {
         </div>
 
         <div className="grid lg:grid-cols-4 sm:grid-cols-1 md:grid-cols-2 gap-3 p-5 bg-zinc-50">
-          {filteredUsers.map(user => (
+          {filteredUsers?.map(user => (
             <UserCard
               key={user.id}
               user={user}
@@ -72,7 +73,7 @@ export default function Home() {
               handleNavigation={() => handleNavigation(user.id)}
             />
           ))}
-          {filteredUsers.length === 0 && (
+          {filteredUsers?.length === 0 && (
             <h1 className="text-red-500">
               No users found! Try looking for a new one
             </h1>
@@ -88,7 +89,7 @@ export default function Home() {
         <Modal isOpen={isModalOpen} handleClose={() => setIsModalOpen(false)}>
           <NewUserModal
             handleModalClose={() => setIsModalOpen(false)}
-            revalidate={revalidate}
+            revalidate={mutate}
           />
         </Modal>
 
@@ -99,7 +100,7 @@ export default function Home() {
           <div className="w-96">
             <DeleteUserDialog
               handleModalClose={() => setDeleteUserModalOpen(false)}
-              revalidate={revalidate}
+              revalidate={mutate}
               userId={currentUserId}
             />
           </div>

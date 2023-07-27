@@ -1,12 +1,14 @@
 import Input from '@/components/FormComponents/Input';
 import ErrorToast from '@/components/Toast/ErrorToast';
 import SuccessToast from '@/components/Toast/SuccessToast';
+import { User } from '@/types/types';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { KeyedMutator } from 'swr';
 
 interface NewUserFormProps {
   handleModalClose: () => void;
-  revalidate: () => Promise<void>;
+  revalidate: () => Promise<User[] | undefined>;
 }
 
 export default function NewUserForm({

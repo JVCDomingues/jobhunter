@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import Input from '@/components/FormComponents/Input';
-import { Job } from '@/hooks/useUser';
 import { modalities, status } from '../NewJobForm/constants';
 import ErrorToast from '@/components/Toast/ErrorToast';
 import SuccessToast from '@/components/Toast/SuccessToast';
 import { toast } from 'react-hot-toast';
+import { Job } from '@/types/types';
 
 interface EditJobProps {
   job: Job;

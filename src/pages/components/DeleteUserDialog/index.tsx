@@ -1,11 +1,12 @@
 import ErrorToast from '@/components/Toast/ErrorToast';
 import SuccessToast from '@/components/Toast/SuccessToast';
+import { User } from '@/types/types';
 import { AlertCircleIcon } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
 interface DeleteUserDialogProps {
   handleModalClose: () => void;
-  revalidate: () => Promise<void>;
+  revalidate: () => Promise<User[] | undefined>;
   userId: number;
 }
 
