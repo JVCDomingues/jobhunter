@@ -1,8 +1,8 @@
 import Input from '@/components/FormComponents/Input';
 import ErrorToast from '@/components/Toast/ErrorToast';
 import SuccessToast from '@/components/Toast/SuccessToast';
-import { useToast } from '@/components/Toast/ToastContext';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 interface NewUserFormProps {
   handleModalClose: () => void;
@@ -17,7 +17,6 @@ export default function NewUserForm({
     name: '',
     username: '',
   });
-  const { openToast } = useToast();
 
   const handleInputChange = (name: string, value: string) => {
     setFormData({
@@ -52,11 +51,11 @@ export default function NewUserForm({
   };
 
   const triggerErrorToast = (message: string) => {
-    openToast(<ErrorToast message={message} />);
+    toast(<ErrorToast message={message} />);
   };
 
   const triggerSuccessToast = () => {
-    openToast(<SuccessToast message="User added successfully" />);
+    toast(<SuccessToast message="User added successfully" />);
   };
 
   return (

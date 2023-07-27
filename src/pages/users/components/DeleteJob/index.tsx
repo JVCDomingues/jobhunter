@@ -1,7 +1,7 @@
 import ErrorToast from '@/components/Toast/ErrorToast';
 import SuccessToast from '@/components/Toast/SuccessToast';
-import { useToast } from '@/components/Toast/ToastContext';
 import { AlertCircleIcon } from 'lucide-react';
+import { toast } from 'react-hot-toast';
 
 interface DeleteJobProps {
   handleModalClose: () => void;
@@ -14,8 +14,6 @@ export default function DeleteJob({
   jobId,
   revalidate,
 }: DeleteJobProps) {
-  const { openToast } = useToast();
-
   const handleSubmit = async () => {
     const response = await fetch(`http://localhost:3000/api/jobs/${jobId}`, {
       method: 'DELETE',
@@ -35,11 +33,11 @@ export default function DeleteJob({
   };
 
   const triggerErrorToast = (message: string) => {
-    openToast(<ErrorToast message={message} />);
+    toast(<ErrorToast message={message} />);
   };
 
   const triggerSuccessToast = (message: string) => {
-    openToast(<SuccessToast message={message} />);
+    toast(<SuccessToast message={message} />);
   };
 
   return (

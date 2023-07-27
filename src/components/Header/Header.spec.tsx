@@ -10,15 +10,19 @@ describe('Header component', () => {
   it('should render component correctly', () => {
     render(<Header />);
 
-    expect(screen.getByText('jobHunter')).toBeInTheDocument();
+    expect(screen.getByText('JobHunter')).toBeInTheDocument();
   });
 
   it('should be able to open menu when the screen size is small', () => {
-    render(<Header />);
+    render(
+      <div className="w-96">
+        <Header />
+      </div>
+    );
 
     const button = screen.getByTestId('toggle-menu');
     fireEvent.click(button);
 
-    expect(screen.getByRole('navigation')).toBeInTheDocument();
+    expect(screen.getByTestId('close-button')).toBeInTheDocument();
   });
 });

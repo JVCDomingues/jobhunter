@@ -1,9 +1,9 @@
 import Input from '@/components/FormComponents/Input';
 import ErrorToast from '@/components/Toast/ErrorToast';
 import SuccessToast from '@/components/Toast/SuccessToast';
-import { useToast } from '@/components/Toast/ToastContext';
 import { useState } from 'react';
 import { modalities } from './constants';
+import { toast } from 'react-hot-toast';
 
 interface NewJobFormProps {
   userId: number;
@@ -22,8 +22,6 @@ export default function NewJobForm({
     createdAt: '',
     modality: '',
   });
-
-  const { openToast } = useToast();
 
   const handleInputChange = (name: string, value: string) => {
     setFormData({
@@ -54,11 +52,11 @@ export default function NewJobForm({
   };
 
   const triggerSuccessToast = () => {
-    openToast(<SuccessToast message="Job added successfully" />);
+    toast(<SuccessToast message="Job added successfully" />);
   };
 
   const triggerErrorToast = (message: string) => {
-    openToast(<ErrorToast message={message} />);
+    toast(<ErrorToast message={message} />);
   };
 
   const handleSuccess = async () => {

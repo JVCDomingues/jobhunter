@@ -11,11 +11,7 @@ export default async function handler(
 ) {
   if (req.method === 'GET') {
     try {
-      const jobs = await prisma.job.findMany({
-        where: {
-          applierId: Number(req.body.userId),
-        },
-      });
+      const jobs = await prisma.job.findMany();
       return res.status(200).json(jobs);
     } catch (err) {
       return res.status(404).json({ message: 'Jobs not found' });

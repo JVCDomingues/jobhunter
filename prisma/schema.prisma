@@ -18,12 +18,14 @@ model User {
 }
 
 model Job {
-  id        Int      @id @default(autoincrement())
-  name      String
-  company   String
-  status    String   @default("Pending")
-  modality  String   @default("Remote")
-  createdAt DateTime @default(now())
-  applier   User     @relation(fields: [applierId], references: [id], onDelete: Cascade)
-  applierId Int      
+  id          Int      @id @default(autoincrement())
+  name        String
+  company     String   @default("")
+  level       String   @default("")
+  description String   @default("")
+  status      String   @default("Pending")
+  modality    String   @default("Remote")
+  createdAt   DateTime @default(now())
+  applier     User     @relation(fields: [applierId], references: [id], onDelete: Cascade)
+  applierId   Int      
 }

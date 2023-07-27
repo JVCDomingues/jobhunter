@@ -14,6 +14,7 @@ export interface Job {
   createdAt: string;
   modality: string;
   status: string;
+  applierId: number;
 }
 
 const useUsers = () => {

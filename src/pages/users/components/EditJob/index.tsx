@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import Input from '@/components/FormComponents/Input';
-import { useToast } from '@/components/Toast/ToastContext';
 import { Job } from '@/hooks/useUser';
 import { modalities, status } from '../NewJobForm/constants';
 import ErrorToast from '@/components/Toast/ErrorToast';
 import SuccessToast from '@/components/Toast/SuccessToast';
+import { toast } from 'react-hot-toast';
 
 interface EditJobProps {
   job: Job;
@@ -24,8 +24,6 @@ export default function EditJob({
     modality: '',
     status: '',
   });
-
-  const { openToast } = useToast();
 
   const handleInputChange = (name: string, value: string) => {
     setFormData(prevFormData => ({
@@ -54,11 +52,11 @@ export default function EditJob({
   };
 
   const triggerErrorToast = (message: string) => {
-    openToast(<ErrorToast message={message} />);
+    toast(<ErrorToast message={message} />);
   };
 
   const triggerSuccessToast = (message: string) => {
-    openToast(<SuccessToast message={message} />);
+    toast(<SuccessToast message={message} />);
   };
 
   const handleUpdateSuccess = async () => {

@@ -2,6 +2,7 @@ import { Goal } from 'lucide-react';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
+import { links } from './links';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,26 +22,17 @@ export default function Header() {
       <nav
         className={`${
           isMenuOpen ? 'flex' : 'hidden'
-        } md:flex md:items-center md:gap-5`}
+        } md:flex md:items-center md:gap-8`}
       >
-        <Link
-          className="font-normal text-zinc-600 cursor-pointer hover:text-blue-600 transition-all"
-          href="/"
-        >
-          Home
-        </Link>
-        <Link
-          className="font-normal text-zinc-600 cursor-pointer hover:text-blue-600 transition-all"
-          href="/jobs"
-        >
-          Jobs
-        </Link>
-        <Link
-          className="font-normal text-zinc-600 cursor-pointer hover:text-blue-600 transition-all"
-          href="/dashboard"
-        >
-          Dashboard
-        </Link>
+        {links.map(link => (
+          <Link
+            key={link.id}
+            href={link.href}
+            className="font-medium text-zinc-900 cursor-pointer hover:text-blue-600 transition-all text-sm"
+          >
+            {link.label}
+          </Link>
+        ))}
       </nav>
       <div className="md:hidden">
         <button
@@ -49,7 +41,7 @@ export default function Header() {
           data-testid="toggle-menu"
         >
           {isMenuOpen ? (
-            <FiX className="h-6 w-6" />
+            <FiX className="h-6 w-6" data-testid="close-button" />
           ) : (
             <FiMenu className="h-6 w-6" />
           )}

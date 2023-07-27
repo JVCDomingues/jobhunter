@@ -1,7 +1,7 @@
 import ErrorToast from '@/components/Toast/ErrorToast';
 import SuccessToast from '@/components/Toast/SuccessToast';
-import { useToast } from '@/components/Toast/ToastContext';
 import { AlertCircleIcon } from 'lucide-react';
+import { toast } from 'react-hot-toast';
 
 interface DeleteUserDialogProps {
   handleModalClose: () => void;
@@ -14,8 +14,6 @@ export default function DeleteUserDialog({
   revalidate,
   userId,
 }: DeleteUserDialogProps) {
-  const { openToast } = useToast();
-
   const deleteUser = async () => {
     const response = await fetch(`api/users/${userId}`, {
       method: 'DELETE',
@@ -34,11 +32,11 @@ export default function DeleteUserDialog({
   };
 
   const triggerErrorToast = (message: string) => {
-    openToast(<ErrorToast message={message} />);
+    toast(<ErrorToast message={message} />);
   };
 
   const triggerSuccessToast = (message: string) => {
-    openToast(<SuccessToast message={message} />);
+    toast(<SuccessToast message={message} />);
   };
 
   return (
