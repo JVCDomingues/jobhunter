@@ -19,7 +19,7 @@ export default async function handler(
   }
 
   if (req.method === 'POST') {
-    const { name, company, createdAt, userId, modality } = JSON.parse(req.body);
+    const { name, company, createdAt, userId, modality } = req.body;
 
     if (!name || !company || !createdAt || !userId || !modality) {
       return res.status(400).json({ error: 'Missing required fields' });

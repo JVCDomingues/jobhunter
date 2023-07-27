@@ -22,7 +22,7 @@ export default async function handler(
   }
 
   if (req.method === 'PUT') {
-    const { name, status, modality, company, createdAt } = JSON.parse(req.body);
+    const { name, status, modality, company, createdAt } = req.body;
 
     try {
       const data = await prisma.job.update({

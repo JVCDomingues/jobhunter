@@ -16,7 +16,7 @@ export default async function handler(
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  const requestUser = JSON.parse(req.body) as RequestBody;
+  const requestUser = req.body as RequestBody;
 
   const user = await prisma.user.findUnique({
     where: { username: requestUser.username },

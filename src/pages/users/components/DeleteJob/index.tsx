@@ -2,6 +2,7 @@ import ErrorToast from '@/components/Toast/ErrorToast';
 import SuccessToast from '@/components/Toast/SuccessToast';
 import { AlertCircleIcon } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { api } from '@/hooks/useFetch';
 
 interface DeleteJobProps {
   handleModalClose: () => void;
@@ -15,20 +16,20 @@ export default function DeleteJob({
   revalidate,
 }: DeleteJobProps) {
   const handleSubmit = async () => {
-    const response = await fetch(`http://localhost:3000/api/jobs/${jobId}`, {
-      method: 'DELETE',
-    });
+    try {
+      const { status } = await api.delete(`/api/jobs/${jobId}`);
 
-    const data = await response.json();
-
-    if (response.status === 200) {
-      await revalidate();
-      handleModalClose();
-      triggerSuccessToast('Job deleted successfully');
-    }
-
-    if (response.status !== 200) {
-      triggerErrorToast(data.error);
+      if (status === 200 || status === 204) {
+        await revalidate();
+        handleModalClose();
+        triggerSuccessToast('Job deleted successfully.');
+      } else {
+        triggerErrorToast('Failed to delete the job.');
+      }
+    } catch (error) {
+      triggerErrorToast(
+        'An error occurred while deleting the job. Please try again later.'
+      );
     }
   };
 

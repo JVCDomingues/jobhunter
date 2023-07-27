@@ -1,10 +1,10 @@
 import Input from '@/components/FormComponents/Input';
 import ErrorToast from '@/components/Toast/ErrorToast';
 import SuccessToast from '@/components/Toast/SuccessToast';
+import { api } from '@/hooks/useFetch';
 import { User } from '@/types/types';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { KeyedMutator } from 'swr';
 
 interface NewUserFormProps {
   handleModalClose: () => void;
@@ -28,16 +28,12 @@ export default function NewUserForm({
   };
 
   const handleSubmit = async () => {
-    const response = await fetch('api/users/new', {
-      method: 'POST',
-      body: JSON.stringify(formData),
-    });
-    const data = await response.json();
-    if (response.status === 201) {
+    const { data, status } = await api.post('/api/users/new', formData);
+    if (status === 201) {
       handleSuccessRegistration();
     }
 
-    if (response.status !== 201) {
+    if (status !== 201) {
       triggerErrorToast(data.message);
     }
   };

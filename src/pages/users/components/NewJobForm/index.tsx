@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { modalities } from './constants';
 import { toast } from 'react-hot-toast';
 import { User } from '@/types/types';
+import { api } from '@/hooks/useFetch';
 
 interface NewJobFormProps {
   userId?: number;
@@ -38,14 +39,9 @@ export default function NewJobForm({
       userId,
     };
 
-    const response = await fetch('http://localhost:3000/api/jobs', {
-      method: 'POST',
-      body: JSON.stringify(payload),
-    });
+    const { data, status } = await api.post('/api/jobs', payload);
 
-    const data = await response.json();
-
-    if (response.status === 201) {
+    if (status === 201) {
       handleSuccess();
     } else {
       triggerErrorToast(data.message);

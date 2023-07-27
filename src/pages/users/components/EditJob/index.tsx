@@ -5,6 +5,7 @@ import ErrorToast from '@/components/Toast/ErrorToast';
 import SuccessToast from '@/components/Toast/SuccessToast';
 import { toast } from 'react-hot-toast';
 import { Job } from '@/types/types';
+import { api } from '@/hooks/useFetch';
 
 interface EditJobProps {
   job: Job;
@@ -38,13 +39,9 @@ export default function EditJob({
       createdAt: new Date(formData.createdAt).toISOString(),
     };
 
-    const response = await fetch(`http://localhost:3000/api/jobs/${job.id}`, {
-      method: 'PUT',
-      body: JSON.stringify(payload),
-    });
+    const { data, status } = await api.put(`/api/jobs/${job.id}`, payload);
 
-    const data = await response.json();
-    if (response.status === 200) {
+    if (status === 200) {
       handleUpdateSuccess();
     } else {
       triggerErrorToast(data.message);
