@@ -4,11 +4,11 @@ import Head from 'next/head';
 import Header from '@/components/Header';
 import LoadingScreen from '@/components/LoadingScreen';
 import JobTable from './components/JobTable/JobTable';
-import { User } from '@/hooks/useUser';
 import { Plus } from 'lucide-react';
 import Modal from '@/components/Modal';
 import NewJobForm from './components/NewJobForm';
 import Summary from './components/Summary';
+import { User } from '@/types/types';
 
 export default function UserPage() {
   const { query } = useRouter();

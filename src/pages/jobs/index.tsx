@@ -1,11 +1,12 @@
 import Header from '@/components/Header';
-import useJobs from '@/hooks/useJobs';
 import { getDateIntervalMessage } from '../users/helpers/getIntervalMessage';
 import { getDateDifference } from '../users/helpers/getDateDifference';
 import { Briefcase, ExternalLink } from 'lucide-react';
+import { useFetch } from '@/hooks/useFetch';
+import { Job } from '@/types/types';
 
 export default function Jobs() {
-  const { jobs, isLoading } = useJobs();
+  const { data, error, isLoading } = useFetch<Job[]>('/api/jobs');
 
   if (isLoading) {
     return (
@@ -22,7 +23,7 @@ export default function Jobs() {
         <h1 className="text-3xl font-medium text-zinc-800">Jobs</h1>
 
         <div className="pt-5 grid grid-cols-3 gap-4">
-          {jobs.map(job => (
+          {data?.map(job => (
             <div
               key={job.id}
               className="bg-white rounded-lg border border-zinc-300 shadow"
