@@ -4,11 +4,12 @@ import SuccessToast from '@/components/Toast/SuccessToast';
 import { useState } from 'react';
 import { modalities } from './constants';
 import { toast } from 'react-hot-toast';
+import { User } from '@/types/types';
 
 interface NewJobFormProps {
-  userId: number;
+  userId?: number;
   handleModalClose: () => void;
-  revalidate: () => Promise<void>;
+  revalidate: () => Promise<User | undefined>;
 }
 
 export default function NewJobForm({

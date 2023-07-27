@@ -1,8 +1,8 @@
-import { Job } from '@/hooks/useUser';
+import { Job } from '@/types/types';
 import { Briefcase, ThumbsDown, ThumbsUp } from 'lucide-react';
 
 interface SummaryProps {
-  jobs: Job[];
+  jobs?: Job[];
 }
 
 export default function Summary({ jobs }: SummaryProps) {

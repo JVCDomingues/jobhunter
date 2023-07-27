@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Job } from '@/hooks/useUser';
 import { getDateDifference } from '../../helpers/getDateDifference';
 import { getDateIntervalMessage } from '../../helpers/getIntervalMessage';
 import {
@@ -14,10 +13,11 @@ import { filterJobBySearchTerm } from '../../helpers/filterJobBySearchTerm';
 import Modal from '@/components/Modal';
 import EditJob from '../EditJob';
 import DeleteJob from '../DeleteJob';
+import { Job, User } from '@/types/types';
 
 interface JobTableProps {
-  jobs: Job[];
-  revalidate: () => Promise<void>;
+  jobs?: Job[];
+  revalidate: () => Promise<User | undefined>;
 }
 
 export default function JobTable({ jobs, revalidate }: JobTableProps) {
@@ -25,7 +25,7 @@ export default function JobTable({ jobs, revalidate }: JobTableProps) {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState({} as Job);
-  const jobsToShow = filterJobBySearchTerm(jobs, searchTerm);
+  const jobsToShow = jobs && filterJobBySearchTerm(jobs, searchTerm);
 
   const handleEditButtonClick = (job: Job) => {
     setEditModalOpen(true);

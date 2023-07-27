@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Header from '@/components/Header';
@@ -9,51 +9,34 @@ import Modal from '@/components/Modal';
 import NewJobForm from './components/NewJobForm';
 import Summary from './components/Summary';
 import { User } from '@/types/types';
+import { useFetch } from '@/hooks/useFetch';
 
 export default function UserPage() {
   const { query } = useRouter();
-  const [user, setUser] = useState({} as User);
-  const [isLoading, setIsLoading] = useState(false);
+  const { data, error, isLoading, mutate } = useFetch<User>(
+    `/api/users/${query.id}`
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const fetchUser = async () => {
-    setIsLoading(true);
-    const response = await fetch(`http://localhost:3000/api/users/${query.id}`);
-    const data = await response.json();
-
-    if (response.ok) {
-      setUser(data);
-    }
-
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    if (query.id) {
-      fetchUser();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query.id]);
-
-  const revalidate = async () => {
-    await fetchUser();
-  };
 
   if (isLoading) {
     return <LoadingScreen />;
   }
 
+  if (error) {
+    return <h1>Error</h1>;
+  }
+
   return (
     <>
       <Head>
-        <title>{user?.name}</title>
+        <title>{data?.name}</title>
       </Head>
       <div className="h-screen bg-zinc-50">
         <Header />
         {/* Main div */}
         <div className="p-7">
           <h1 className="mb-5 text-3xl font-medium text-zinc-700">Summary</h1>
-          <Summary jobs={user.jobs} />
+          <Summary jobs={data?.jobs} />
 
           <div className="flex items-center justify-between gap-5 mb-3 mt-10">
             <button
@@ -65,15 +48,15 @@ export default function UserPage() {
             </button>
           </div>
 
-          <JobTable jobs={user.jobs} revalidate={revalidate} />
+          <JobTable jobs={data?.jobs} revalidate={mutate} />
         </div>
         {/* Main div */}
 
         <Modal isOpen={isModalOpen} handleClose={() => setIsModalOpen(false)}>
           <NewJobForm
-            userId={user.id}
+            userId={data?.id}
             handleModalClose={() => setIsModalOpen(false)}
-            revalidate={revalidate}
+            revalidate={mutate}
           />
         </Modal>
       </div>
