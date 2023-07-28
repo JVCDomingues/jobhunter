@@ -29,13 +29,17 @@ export default function UserPage() {
   return (
     <>
       <Head>
-        <title>{data?.name}</title>
+        <title>{data?.name} | JobHunter</title>
       </Head>
       <div className="h-screen bg-zinc-50">
         <Header />
         {/* Main div */}
         <div className="p-7">
-          <h1 className="mb-5 text-3xl font-medium text-zinc-700">Summary</h1>
+          <div className="flex items-center gap-3 mb-5">
+            <h1 className="text-3xl font-medium text-zinc-700">Summary</h1>
+            <div className="rounded-full w-1 h-1 bg-slate-500"></div>
+            <span className="text-sm text-slate-500">@{data?.username}</span>
+          </div>
           <Summary jobs={data?.jobs} />
 
           <div className="flex items-center justify-between gap-5 mb-3 mt-10">

@@ -1,15 +1,18 @@
+import Link from 'next/link';
 import { useState } from 'react';
 import { getDateDifference } from '../../helpers/getDateDifference';
 import { getDateIntervalMessage } from '../../helpers/getIntervalMessage';
+import { jobStatusDictionary } from '../../helpers/jobStatusIcon';
+import { filterJobBySearchTerm } from '../../helpers/filterJobBySearchTerm';
 import {
+  ArrowUpRightSquare,
   Building2,
   CalendarDays,
   Flag,
   FolderEdit,
   MapPin,
+  MenuSquare,
 } from 'lucide-react';
-import { jobStatusDictionary } from '../../helpers/jobStatusIcon';
-import { filterJobBySearchTerm } from '../../helpers/filterJobBySearchTerm';
 import Modal from '@/components/Modal';
 import EditJob from '../EditJob';
 import DeleteJob from '../DeleteJob';
@@ -108,6 +111,12 @@ export default function JobTable({ jobs, revalidate }: JobTableProps) {
                   Applied in
                 </div>
               </th>
+              <th scope="col" className="px-6 py-3">
+                <div className="flex items-center gap-2">
+                  <MenuSquare size={16} />
+                  Overview
+                </div>
+              </th>
             </tr>
           </thead>
 
@@ -128,6 +137,15 @@ export default function JobTable({ jobs, revalidate }: JobTableProps) {
                   {getDateIntervalMessage(
                     getDateDifference(job.createdAt, new Date())
                   )}
+                </td>
+                <td className="px-6 py-4">
+                  <Link
+                    href={`/jobs/${job.id}`}
+                    className="text-blue-600 flex items-center gap-2 font-normal hover:underline"
+                  >
+                    <ArrowUpRightSquare size={16} />
+                    Details
+                  </Link>
                 </td>
                 <td>
                   <button

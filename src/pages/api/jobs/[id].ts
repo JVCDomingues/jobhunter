@@ -22,7 +22,8 @@ export default async function handler(
   }
 
   if (req.method === 'PUT') {
-    const { name, status, modality, company, createdAt } = req.body;
+    const { name, status, modality, company, createdAt, description } =
+      req.body;
 
     try {
       const data = await prisma.job.update({
@@ -35,12 +36,27 @@ export default async function handler(
           status,
           modality,
           createdAt,
+          description,
         },
       });
 
       return res.status(200).json(data);
     } catch (err) {
       return res.status(400).json({ message: err });
+    }
+  }
+
+  if (req.method === 'GET') {
+    try {
+      const jobs = await prisma.job.findUnique({
+        where: {
+          id: Number(req.query.id),
+        },
+      });
+
+      return res.status(200).json(jobs);
+    } catch (err) {
+      return res.status(404).json({ message: err });
     }
   }
 }

@@ -22,6 +22,7 @@ model Job {
   name        String
   company     String   @default("")
   level       String   @default("")
+  category    String   @default("")
   description String   @default("")
   status      String   @default("Pending")
   modality    String   @default("Remote")

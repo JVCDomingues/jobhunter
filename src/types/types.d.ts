@@ -8,6 +8,7 @@ export interface User {
 export interface Job {
   id: number;
   name: string;
+  description: string;
   company: string;
   createdAt: string;
   modality: string;
